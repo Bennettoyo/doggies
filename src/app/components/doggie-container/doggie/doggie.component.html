@@ -1,0 +1,20 @@
+<div class="flex-container">
+<mat-card *ngFor="let dog of data" class="card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image" [ngStyle]="{ 'background-image': 'url(' + dog.image.url + ')' }"></div>
+    <mat-card-title>{{dog.name}}</mat-card-title>
+    <mat-card-subtitle>{{dog.breed_group || '-'}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{dog.image.url}}" alt="Photo of a {{dog.name}}">
+  <mat-card-content>
+    <p>The {{toLowerCase(dog.name)}} is {{formatString(dog.temperament) || 'pretty cool'}}.</p>
+    <p>Origin: {{dog.origin || 'Uknown 🐶'}}</p>
+    <p>Life Expectancy: {{dog.life_span || 'Uknown 🐶'}}</p>
+    <p>Bred For: {{dog.bred_for || 'Uknown 🐶'}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+      <mat-icon *ngIf="dog.isFavourite" (click)="favourited(dog.id, dog.isFavourite); dog.isFavourite = false" class="heart-icon">favorite</mat-icon>
+      <mat-icon *ngIf="!dog.isFavourite" (click)="favourited(dog.id, dog.isFavourite); dog.isFavourite = true" class="heart-icon">favorite_outline</mat-icon>
+  </mat-card-actions>
+</mat-card>
+</div>
